@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy Birthday Rasi 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after {
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html, body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Cinzel', serif;
+    background: radial-gradient(ellipse at top, #ffd6e7, #ffb3cb, #ff85a1);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 16px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    width: 100%;
+    max-width: 480px;
+    background: linear-gradient(160deg, #fce4ec 0%, #fad7e6 40%, #fff0f5 100%);
+    border-radius: clamp(12px, 4vw, 24px);
+    overflow: hidden;
+    position: relative;
+    box-shadow:
+      0 8px 32px rgba(200,80,120,0.25),
+      0 2px 8px rgba(200,80,120,0.15),
+      inset 0 0 0 1px rgba(255,255,255,0.6);
+    margin: auto;
+  }
+
+  /* ── FLORAL BG BLOBS ── */
+  .floral-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .floral-bg::before {
+    content: '';
+    position: absolute;
+    top: -10%; left: -8%;
+    width: 55%; height: 55%;
+    background: radial-gradient(circle, rgba(255,182,193,0.55) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .floral-bg::after {
+    content: '';
+    position: absolute;
+    top: 5%; right: -10%;
+    width: 45%; height: 45%;
+    background: radial-gradient(circle, rgba(255,160,180,0.4) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  /* ── FLOATING FLOWERS ── */
+  .flower {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.65;
+    animation: floatPetal 6s ease-in-out infinite;
+  }
+  @keyframes floatPetal {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-6px) rotate(8deg); }
+  }
+
+  /* ── TOP SECTION ── */
+  .top-section {
+    position: relative;
+    display: flex;
+    height: clamp(220px, 55vw, 400px);
+    z-index: 1;
+  }
+
+  /* MAIN PHOTO */
+  .main-photo {
+    width: 52%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .main-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: 20% top;
+    display: block;
+  }
+
+  /* PHOTO GRID */
+  .photo-grid {
+    flex: 1;
+    padding: clamp(4px, 1.5vw, 10px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3px, 1vw, 6px);
+    position: relative;
+  }
+
+  .grid-row {
+    display: flex;
+    gap: clamp(3px, 1vw, 6px);
+    flex: 1;
+  }
+
+  .grid-photo {
+    flex: 1;
+    border-radius: clamp(6px, 2vw, 12px);
+    overflow: visible;
+    border: 2px solid rgba(255,255,255,0.85);
+    box-shadow: 0 2px 8px rgba(200,80,120,0.18);
+    min-height: 0;
+    position: relative;
+    transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+  }
+  .grid-photo > img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: clamp(4px, 1.5vw, 10px);
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  /* Hover/touch glow — desktop */
+  .grid-photo:hover {
+    border-color: #ff4d8d;
+    box-shadow:
+      0 0 0 3px rgba(233,30,99,0.4),
+      0 0 20px 6px rgba(233,30,99,0.5),
+      0 0 40px 12px rgba(255,100,160,0.3);
+    transform: scale(1.06);
+    z-index: 10;
+  }
+  .grid-photo:hover > img {
+    transform: scale(1.08);
+    filter: brightness(1.12) saturate(1.25);
+  }
+  /* Touch glow — mobile */
+  .grid-photo.glow {
+    border-color: #ff4d8d;
+    box-shadow:
+      0 0 0 3px rgba(233,30,99,0.4),
+      0 0 20px 6px rgba(233,30,99,0.5),
+      0 0 40px 12px rgba(255,100,160,0.3);
+    transform: scale(1.06);
+    z-index: 10;
+  }
+  .grid-photo.glow > img {
+    transform: scale(1.08);
+    filter: brightness(1.12) saturate(1.25);
+  }
+  /* Main photo glow */
+  .main-photo {
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .main-photo:hover,
+  .main-photo.glow {
+    box-shadow:
+      0 0 0 4px rgba(233,30,99,0.45),
+      0 0 25px 8px rgba(233,30,99,0.5),
+      0 0 50px 15px rgba(255,100,160,0.3);
+  }
+  .main-photo img {
+    transition: filter 0.3s ease;
+  }
+  .main-photo:hover img,
+  .main-photo.glow img {
+    filter: brightness(1.08) saturate(1.2);
+  }
+  /* Heart wrap glow */
+  .heart-wrap {
+    transition: filter 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+  }
+  .heart-wrap:hover,
+  .heart-wrap.glow {
+    filter: drop-shadow(0 0 10px rgba(233,30,99,0.7)) drop-shadow(0 0 22px rgba(255,100,160,0.5));
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  /* HEART PHOTO — responsive sizing */
+  .heart-wrap {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(80px, 22vw, 130px);
+    height: clamp(74px, 20vw, 120px);
+    z-index: 3;
+    filter: drop-shadow(0 3px 10px rgba(200,80,120,0.45));
+  }
+  .heart-wrap svg {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+  }
+  .heart-clip-img {
+    width: 100%; height: 100%;
+    clip-path: url(#heartClip);
+    overflow: hidden;
+  }
+  .heart-clip-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: 50% 5%;
+    display: block;
+  }
+  .heart-border {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  /* WATERMARK */
+  .watermark {
+    position: absolute;
+    top: clamp(6px, 2vw, 14px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(7px, 1.8vw, 11px);
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.35);
+    z-index: 5;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+    font-family: 'Cinzel', serif;
+  }
+
+  /* ── BOTTOM SECTION ── */
+  .bottom-section {
+    background: linear-gradient(180deg, rgba(255,242,248,0.97) 0%, #fff8fb 100%);
+    padding: clamp(10px, 3vw, 18px) clamp(12px, 4vw, 22px) clamp(12px, 3.5vw, 20px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid rgba(255,182,193,0.4);
+  }
+
+  /* Birthday Text */
+  .birthday-text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .happy-birthday {
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+    color: #222;
+    line-height: 1.05;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hb-happy {
+    font-size: clamp(16px, 5.5vw, 28px);
+    letter-spacing: 0.5px;
+  }
+  .hb-bday {
+    font-size: clamp(16px, 5.5vw, 28px);
+    letter-spacing: 0.5px;
+  }
+
+  .name-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(22px, 7.5vw, 40px);
+    color: #111;
+    font-weight: 700;
+    margin-top: clamp(1px, 0.5vw, 4px);
+    white-space: nowrap;
+  }
+
+  /* Sparkle dots near text */
+  .sparkle {
+    display: inline-block;
+    color: #b8860b;
+    font-size: 0.85em;
+    animation: twinkle 2s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  /* ── CALENDAR ── */
+  .calendar {
+    flex-shrink: 0;
+    text-align: center;
+    background: rgba(255,255,255,0.6);
+    border-radius: clamp(8px, 2.5vw, 14px);
+    padding: clamp(6px, 2vw, 12px) clamp(8px, 2.5vw, 14px);
+    box-shadow: 0 2px 10px rgba(200,80,120,0.12);
+    border: 1px solid rgba(255,182,193,0.5);
+  }
+
+  .cal-month {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(8px, 2.2vw, 12px);
+    font-weight: 700;
+    letter-spacing: clamp(1px, 0.5vw, 2.5px);
+    color: #333;
+    margin-bottom: clamp(4px, 1.2vw, 8px);
+    white-space: nowrap;
+  }
+
+  .cal-table {
+    border-collapse: separate;
+    border-spacing: clamp(1px, 0.5vw, 3px);
+  }
+
+  .cal-table th {
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+    color: #aaa;
+    font-size: clamp(7px, 1.8vw, 10px);
+    width: clamp(16px, 4.5vw, 24px);
+    text-align: center;
+    padding-bottom: 2px;
+  }
+
+  .cal-table td {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(7px, 1.8vw, 10px);
+    color: #555;
+    text-align: center;
+    width: clamp(16px, 4.5vw, 24px);
+    height: clamp(16px, 4.5vw, 24px);
+    border-radius: 50%;
+    cursor: default;
+    transition: background 0.2s;
+  }
+
+  .cal-table td.highlight {
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+    color: #fff;
+    font-weight: 700;
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 2px rgba(233,30,99,0.25),
+      0 2px 8px rgba(233,30,99,0.5);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 2px rgba(233,30,99,0.25), 0 2px 8px rgba(233,30,99,0.5); }
+    50%      { box-shadow: 0 0 0 5px rgba(233,30,99,0.15), 0 3px 12px rgba(233,30,99,0.6); }
+  }
+
+  /* Leaf corner decor */
+  .leaf-corner {
+    position: absolute;
+    bottom: 0; right: 0;
+    font-size: clamp(28px, 8vw, 48px);
+    line-height: 1;
+    opacity: 0.25;
+    transform: rotate(-20deg) translate(10%, 10%);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* ── TABLET / DESKTOP adjustments ── */
+  @media (min-width: 520px) {
+    html, body {
+      padding: 24px;
+    }
+    .top-section {
+      height: clamp(320px, 50vw, 400px);
+    }
+  }
+
+  /* ── SMALL PHONES (< 360px) ── */
+  @media (max-width: 359px) {
+    .bottom-section {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .calendar {
+      width: 100%;
+    }
+    .cal-table {
+      width: 100%;
+    }
+    .cal-table th, .cal-table td {
+      width: auto;
+    }
+  }
+
+  /* ── VERY TALL SCREENS ── */
+  @media (min-height: 900px) and (min-width: 520px) {
+    .card {
+      margin-top: 40px;
+    }
+  }
+
+  /* ── MUSIC BUTTON ── */
+  #musicBtn {
+    position: fixed;
+    bottom: -100px;
+    right: -100px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+    border: none;
+    background: none;
+  }
+
+  /* Tap-to-start overlay */
+  #tapOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(252,228,236,0.82);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: opacity 0.5s;
+  }
+  #tapOverlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .tap-icon {
+    font-size: clamp(48px, 14vw, 72px);
+    animation: tapBounce 1.2s ease-in-out infinite;
+    margin-bottom: 12px;
+  }
+  @keyframes tapBounce {
+    0%,100% { transform: scale(1) translateY(0); }
+    50%      { transform: scale(1.12) translateY(-8px); }
+  }
+  .tap-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(20px, 5.5vw, 30px);
+    font-weight: 700;
+    color: #c2185b;
+    text-shadow: 0 2px 8px rgba(255,255,255,0.8);
+    letter-spacing: 1px;
+  }
+  .tap-sub {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(10px, 2.5vw, 13px);
+    color: #e91e63;
+    margin-top: 6px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="floral-bg"></div>
+
+  <!-- Floating flowers -->
+  <div class="flower" style="top:4px;left:4px;font-size:clamp(18px,5vw,32px);" aria-hidden="true">🌸</div>
+  <div class="flower" style="top:18px;right:55px;font-size:clamp(14px,3.5vw,22px);animation-delay:1s;" aria-hidden="true">🌸</div>
+  <div class="flower" style="top:55px;right:8px;font-size:clamp(11px,2.5vw,16px);animation-delay:2s;" aria-hidden="true">🌸</div>
+  <div class="flower" style="top:155px;left:2px;font-size:clamp(12px,3vw,18px);animation-delay:1.5s;" aria-hidden="true">🌸</div>
+
+  <!-- SVG defs for heart clip -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
+        <path d="M0.5,0.85 C0.5,0.85 0.04,0.52 0.04,0.26 C0.04,0.12 0.15,0.04 0.26,0.04 C0.36,0.04 0.46,0.11 0.5,0.19 C0.54,0.11 0.64,0.04 0.74,0.04 C0.85,0.04 0.96,0.12 0.96,0.26 C0.96,0.52 0.5,0.85 0.5,0.85 Z"/>
+      </clipPath>
+    </defs>
+  </svg>
+
+  <!-- TOP SECTION -->
+  <div class="top-section" role="img" aria-label="Birthday photo collage of Divya">
+    <div class="watermark">Sai Official</div>
+
+    <!-- Main photo -->
+    <div class="main-photo">
+      <img src="pic1.jpg" alt="Divya in pink dress" loading="eager"/>
+    </div>
+
+    <!-- Grid photos -->
+    <div class="photo-grid">
+      <div class="grid-row">
+        <div class="grid-photo">
+          <img src="pic2.jpg" alt="Divya" style="object-position:30% 5%;"/>
+        </div>
+        <div class="grid-photo">
+          <img src="pic3.jpg" alt="Divya" style="object-position:70% 8%;"/>
+        </div>
+      </div>
+
+      <div class="grid-row">
+        <div class="grid-photo">
+          <img src="pic4.jpg" alt="Divya" style="object-position:45% 18%;"/>
+        </div>
+        <div class="grid-photo">
+          <img src="pic5.jpg" alt="Divya" style="object-position:80% 12%;"/>
+        </div>
+      </div>
+
+      <!-- Heart photo -->
+      <div class="heart-wrap" aria-hidden="true">
+        <div class="heart-clip-img">
+          <img src="pic6.jpg" alt="Divya" style="object-position:50% 5%;"/>
+        </div>
+        <svg class="heart-border" viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50,85 C50,85 4,52 4,26 C4,12 15,4 26,4 C36,4 46,11 50,19 C54,11 64,4 74,4 C85,4 96,12 96,26 C96,52 50,85 50,85 Z"
+                stroke="white" stroke-width="3" fill="none" opacity="0.9"/>
+        </svg>
+      </div>
+
+      <div class="grid-row">
+        <div class="grid-photo">
+          <img src="/pic7.jpg" alt="Divya" style="object-position:22% 22%;"/>
+        </div>
+        <div class="grid-photo">
+          <img src="pic8.jpg" alt="Divya" style="object-position:62% 28%;"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM SECTION -->
+  <div class="bottom-section">
+    <div class="birthday-text">
+      <div class="happy-birthday">
+        <span class="hb-happy"><span class="sparkle">✦</span> HAPPY <span class="sparkle" style="animation-delay:.6s">✦</span></span>
+        <span class="hb-bday">BIRTHDAY</span>
+      </div>
+      <div class="name-text">Rasi!</div>
+    </div>
+
+    <!-- Calendar -->
+    <div class="calendar" role="region" aria-label="September 2003 calendar">
+      <div class="cal-month">SEPTEMBER 2003</div>
+      <table class="cal-table" aria-label="September 2003">
+        <thead>
+          <tr>
+            <th scope="col">S</th>
+            <th scope="col">M</th>
+            <th scope="col">T</th>
+            <th scope="col">W</th>
+            <th scope="col">T</th>
+            <th scope="col">F</th>
+            <th scope="col">S</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td>1</td>
+            <td class="highlight" aria-label="Birthday September 2, 2003">2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+          </tr>
+          <tr>
+            <td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td>
+          </tr>
+          <tr>
+            <td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td>
+          </tr>
+          <tr>
+            <td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td>
+          </tr>
+          <tr>
+            <td>28</td><td>29</td><td>30</td><td></td><td></td><td></td><td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="leaf-corner" aria-hidden="true">🌿</div>
+  </div>
+</div>
+<!-- ══ BACKGROUND MUSIC ══ -->
+<audio id="bgMusic" loop></audio>
+
+<!-- Tap-to-start overlay -->
+<div id="tapOverlay" role="dialog" aria-label="Tap to start birthday music">
+  <div class="tap-icon">🎵</div>
+  <div class="tap-text">Tap to Open Rasi's Card</div>
+  <div class="tap-sub">🎂 With Birthday Music 🎂</div>
+</div>
+
+<!-- Floating music toggle button -->
+<button id="musicBtn" aria-label="Toggle music" title="Toggle music">🔊</button>
+
+<script>
+(function () {
+  let ctx, masterGain, playing = false;
+  const BPM = 108;
+  const BEAT = 60 / BPM;
+  const notes = {
+    C4:261.63,D4:293.66,E4:329.63,F4:349.23,G4:392.00,
+    A4:440.00,B4:493.88,C5:523.25,D5:587.33,E5:659.25,
+    F5:698.46,G5:783.99,A5:880.00
+  };
+  const melody = [
+    ["G4",0.75],["G4",0.25],["A4",1],["G4",1],["C5",1],["B4",2],
+    ["G4",0.75],["G4",0.25],["A4",1],["G4",1],["D5",1],["C5",2],
+    ["G4",0.75],["G4",0.25],["G5",1],["E5",1],["C5",0.75],["B4",0.25],["A4",2],
+    ["F5",0.75],["F5",0.25],["E5",1],["C5",1],["D5",1],["C5",3]
+  ];
+
+  function createCtx() {
+    if (ctx) return;
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    masterGain = ctx.createGain();
+    masterGain.gain.setValueAtTime(0.38, ctx.currentTime);
+    masterGain.connect(ctx.destination);
+  }
+
+  function playNote(freq, startTime, duration) {
+    if (!freq) return;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(freq, startTime);
+
+    const osc2 = ctx.createOscillator();
+    osc2.type = "triangle";
+    osc2.frequency.setValueAtTime(freq * 2, startTime);
+    const gain2 = ctx.createGain();
+    gain2.gain.setValueAtTime(0.12, startTime);
+    osc2.connect(gain2); gain2.connect(masterGain);
+
+    gain.gain.setValueAtTime(0, startTime);
+    gain.gain.linearRampToValueAtTime(0.65, startTime + 0.02);
+    gain.gain.setValueAtTime(0.65, startTime + duration * 0.75);
+    gain.gain.linearRampToValueAtTime(0, startTime + duration * 0.95);
+    osc.connect(gain); gain.connect(masterGain);
+
+    osc.start(startTime); osc2.start(startTime);
+    osc.stop(startTime + duration); osc2.stop(startTime + duration);
+  }
+
+  function scheduleMelody(startAt) {
+    let t = startAt;
+    melody.forEach(([name, beats]) => {
+      playNote(notes[name], t, beats * BEAT * 0.9);
+      t += beats * BEAT;
+    });
+    return t - startAt;
+  }
+
+  let loopTimeout;
+  function startMusic() {
+    createCtx();
+    if (ctx.state === "suspended") ctx.resume();
+    playing = true;
+    let startAt = ctx.currentTime + 0.05;
+    const dur = scheduleMelody(startAt);
+    function loop() {
+      if (!playing) return;
+      startAt += dur;
+      scheduleMelody(startAt);
+      loopTimeout = setTimeout(loop, (dur - 0.3) * 1000);
+    }
+    loopTimeout = setTimeout(loop, (dur - 0.3) * 1000);
+    btn.textContent = "🔊";
+    btn.classList.add("playing");
+  }
+
+  function stopMusic() {
+    playing = false;
+    clearTimeout(loopTimeout);
+    if (ctx) {
+      masterGain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.4);
+      setTimeout(() => { try { ctx.close(); } catch(e){} ctx = null; }, 500);
+    }
+    btn.textContent = "🔇";
+    btn.classList.remove("playing");
+  }
+
+  const overlay = document.getElementById("tapOverlay");
+  const btn = document.getElementById("musicBtn");
+
+  function dismiss() {
+    overlay.classList.add("hidden");
+    startMusic();
+  }
+
+
+  // Touch glow effect for mobile
+  document.querySelectorAll('.grid-photo, .main-photo, .heart-wrap').forEach(el => {
+    el.addEventListener('touchstart', function() {
+      this.classList.add('glow');
+    }, { passive: true });
+    el.addEventListener('touchend', function() {
+      const self = this;
+      setTimeout(() => self.classList.remove('glow'), 600);
+    }, { passive: true });
+  });
+  overlay.addEventListener("click", dismiss, { once: true });
+  overlay.addEventListener("touchend", function(e){ e.preventDefault(); dismiss(); }, { once: true });
+  btn.addEventListener("click", () => { playing ? stopMusic() : startMusic(); });
+})();
+</script>
+</body>
+</html>
